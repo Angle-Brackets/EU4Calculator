@@ -1,0 +1,7 @@
+.baseShape {
+    width: 100%;
+    text-align: center;
+    border-radius: 12px;
+    margin: 0 15px;
+    box-shadow: rgba(0, 118, 220, 0.18) 2px 2px 15px;
+}

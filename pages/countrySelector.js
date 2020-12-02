@@ -2,7 +2,8 @@ import utilStyles from '../styles/utils.module.css'
 import {Layout, Button, Row, Col, Input} from 'antd'
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import CountryPanel from "../components/CountryPanel";
-import {getCountries, getIDs} from '../utils/getCountryOrID'
+import {getCountries, getIDs} from '../utils/getIdentifiers'
+import Link from 'next/link'
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -14,7 +15,9 @@ export default function countrySelector() {
     return (
       <Layout style={{overflowX: "hidden"}}>
            <Header className={utilStyles.siteHeading2Xl} style={{backgroundColor: "rgba(88, 107, 232)" , color: "white", textAlign: "center"}}>
-             <Button className={utilStyles.backButton} style={{backgroundColor: "rgba(88, 107, 232)", border: "none", marginTop: "0.55rem", position: "absolute", left: "2%"}} icon={<ArrowLeftOutlined/>} shape="circle" ghost="true" size="large" href="/"/>
+             <Link href="/">
+                <Button className={utilStyles.backButton} style={{backgroundColor: "rgba(88, 107, 232)", border: "none", marginTop: "0.55rem", position: "absolute", left: "2%"}} icon={<ArrowLeftOutlined/>} shape="circle" ghost="true" size="large"/>
+             </Link>
              <Search placeholder="Enter Country Name" onSearch={value => console.log(value)} enterButton style={{position: "absolute", right: "2%", width: 200, marginTop: "1rem"}}/>
              Countries
            </Header>

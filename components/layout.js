@@ -2,11 +2,15 @@ import Head from 'next/head'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
+import {Context} from '../contexts/countryContext'
+import {useContext} from 'react'
+import countrySelector from '../pages/countrySelector'
 
-const name = 'Bharat'
-export const siteTitle = 'Next.js Sample Website'
+export const siteTitle = 'EU4 Calculator'
 
 export default function Layout({ children, home }) {
+  const context = useContext(Context);
+  const name = context.name;
   return (
     <div className={styles.container}>
       <Head>
@@ -28,15 +32,18 @@ export default function Layout({ children, home }) {
         {home ? (
           <>
             <img
-              src="/images/flags/BHA.png"
+              src={context.flag + ".png"}
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
               alt={name}
             />
+            {/* <object data="/logo.svg" type="image/svg+xml" width="400" height="400">
+                <img src="/images/flags/PLC.png" />
+            </object> */}
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
           </>
         ) : (
           <>
-            <Link href="/">
+            <Link href="countrySelector">
               <a>
                 <img
                   src="/images/profile.jpg"

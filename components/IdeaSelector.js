@@ -1,4 +1,4 @@
-import {Typography, Col, Popover, Button} from 'antd';
+import {Typography, Col, Popover, Button, Row, Space, Checkbox} from 'antd';
 import {beautifyModifiers} from '../utils/dictionary';
 
 const { Title, Paragraph, Text } = Typography;
@@ -7,8 +7,10 @@ const IdeaSelector = (props) => {
     const {ideas, traditions} = props.countryData;
     let selectedGroups = []; //Stores the selected ideas for transport, not display, so the array is just meant to contain the bonuses in no order.
     let displayTrad = traditions; //Stores for display.
+    let displayIdeas = ideas;
     
     displayTrad = beautifyModifiers(displayTrad);
+    displayIdeas = beautifyModifiers(displayIdeas);
 
     const defaultTradDisplay = (
         <div style={{textTransform: "capitalize"}}>
@@ -21,17 +23,47 @@ const IdeaSelector = (props) => {
         </div>
     );
 
-
     return (
         <Typography>
             <Title level={4}>Traditions</Title>
-            <Col span={24}>
+            <Space direction="vertical">
                 <Popover placement="right" title={"Default Traditions"} content={defaultTradDisplay}>
-                    <Button> Default Traditions </Button>
+                    <Checkbox checked={true}> Default Traditions </Checkbox>
                 </Popover>
-            </Col>
+
+                <Popover placement="right" title={"Bonus Tradition"} content={<div style={{textTransform: "capitalize"}}><p>{displayTrad[1][0] + ": " + displayTrad[1][1]}</p></div>}>
+                    <Checkbox checked={true}> Bonus Tradition </Checkbox>
+                </Popover>
+            </Space>
+
+            <Title level={4}>National Ideas</Title>
+            <Space direction="vertical">
+                {generateButtons(displayIdeas, ideas, props.onConfirm)}
+            </Space>
+
         </Typography>
     );
+}
+
+function generateIdeaDisplay(ideaSet){
+    return ideaSet.map((idea) => <p>{
+        (ideaSet[ideaSet.indexOf(idea) + 1] != null && (idea.indexOf("%") == -1 && idea.indexOf("+") == -1)) ?  idea + ": " + ideaSet[ideaSet.indexOf(idea) + 1] : null
+    }</p>
+    )
+}
+
+function generateButtons(ideaList, ideaVals, callback){
+    let num = 1;
+
+    let allIdeas = (
+        ideaList.map((ideaGroup) => 
+        <Popover placement="right" title={"National Idea Set #" + num} content={<div style={{textTransform: "capitalize"}}>{generateIdeaDisplay(ideaGroup)}</div>}>
+            <Checkbox onClick={callback} checked={true}> National Idea Set #{num++} </Checkbox>
+        </Popover>
+        )
+    )
+
+    return allIdeas;
 }
 
 export default IdeaSelector;
