@@ -27,7 +27,8 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-palette": "^1.0.2",
-    "react-query": "^2.12.1"
+    "react-query": "^2.12.1",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "typescript": "^4.0.2"

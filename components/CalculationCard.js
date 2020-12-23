@@ -5,8 +5,6 @@ import calcStyle from '../styles/CalcCard.module.css'
 const {Meta} = Card;
 
 const CalculationCard = (props) => {
-    console.log(props.link);
-
     const redirect = () => {
         return <Link href={"/"+props.link}/>
         

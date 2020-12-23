@@ -1,14 +1,11 @@
-import Head from 'next/head'
 import {Layout, Row, Spin, Divider} from 'antd'
-import utilStyles from '../styles/utils.module.css'
 import {Component, useState} from 'react'
 import Link from 'next/link'
 import {Context} from '../contexts/countryContext'
-import headerStyle from '../styles/headerStyle.module.css'
 import layout from '../styles/layout.module.css'
 import utils from '../styles/utils.module.css'
 
-
+import SiteHeader from '../components/siteHeader'
 import CalculationCard from '../components/CalculationCard'
 
 
@@ -19,17 +16,8 @@ export default class Main extends Component {
 
   render() {
     return (
-      <Layout style={{background: "none"}}>
-        <Head>
-          <title>EU4 Calculator</title>
-        </Head>
-        <Header className={headerStyle.header}>
-          <Link href="/">
-            <img src="/logo.svg" className={headerStyle.logo}/>
-          </Link>
-          The Europa Universalis IV Calculator
-        </Header>
-
+      <Layout style={{backgroundColor:"white"}}>
+        <SiteHeader/>
         <Content className={layout.container}>
           <header className={layout.header}>
             <Link href="countrySelector">

@@ -1,30 +1,23 @@
-import utilStyles from '../styles/utils.module.css'
 import {Layout, Button, Row, Col, Input} from 'antd'
-import { ArrowLeftOutlined } from '@ant-design/icons';
 import CountryPanel from "../components/CountryPanel";
 import {getCountries, getIDs} from '../utils/getIdentifiers'
-import Link from 'next/link'
+import SiteHeader from '../components/SiteHeader'
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
 const COUNTRIES = getCountries() //I know its sloppy, but tell JS to make file reading easier
 const IDs = getIDs()
+let countriesFiltered = COUNTRIES;
 
+//There is a known bug with refreshing on this page in regards to the top bar not being the correct color, still unsure how to fix.
 export default function countrySelector() {
     return (
       <Layout style={{overflowX: "hidden"}}>
-           <Header className={utilStyles.siteHeading2Xl} style={{backgroundColor: "rgba(88, 107, 232)" , color: "white", textAlign: "center"}}>
-             <Link href="/">
-                <Button className={utilStyles.backButton} style={{backgroundColor: "rgba(88, 107, 232)", border: "none", marginTop: "0.55rem", position: "absolute", left: "2%"}} icon={<ArrowLeftOutlined/>} shape="circle" ghost="true" size="large"/>
-             </Link>
-             <Search placeholder="Enter Country Name" onSearch={value => console.log(value)} enterButton style={{position: "absolute", right: "2%", width: 200, marginTop: "1rem"}}/>
-             Countries
-           </Header>
-
+           <SiteHeader title="Countries" searchAvailable={true}/>
            <Content>
              <Row gutter={16}>
-                {COUNTRIES.map(country => (
+                {countriesFiltered.map(country => (
                   <CountryPanel countryName={country} countryId={IDs[COUNTRIES.indexOf(country)]} key={country}/>
                 ))}
              </Row>
