@@ -1,4 +1,5 @@
 import React from 'react';
+import {modifierVals} from '../utils/modifierData'
 export const Context = React.createContext();
 
 export class Provider extends React.Component {
@@ -6,7 +7,7 @@ export class Provider extends React.Component {
         name: "None Selected",
         tag: String,
         flag: "images/flags/ULM",
-        bonuses: Array
+        modifiers: modifierVals
     }
 
     render() {

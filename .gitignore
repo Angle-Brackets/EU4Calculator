@@ -31,3 +31,4 @@ yarn-error.log*
 
 #other files
 /public/images/flags
+/public/images/icons

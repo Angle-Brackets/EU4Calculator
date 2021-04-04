@@ -22,17 +22,17 @@ const IdeaSelector = (props) => {
             </p>
         </div>
     );
-
+    //Will later change to a list element.
     return (
         <Typography>
             <Title level={4}>Traditions</Title>
             <Space direction="vertical">
                 <Popover placement="right" title={"Default Traditions"} content={defaultTradDisplay}>
-                    <Checkbox checked={true}> Default Traditions </Checkbox>
+                    <Text style={{cursor: "pointer"}}> Default Traditions </Text>
                 </Popover>
 
                 <Popover placement="right" title={"Bonus Tradition"} content={<div style={{textTransform: "capitalize"}}><p>{displayTrad[1][0] + ": " + displayTrad[1][1]}</p></div>}>
-                    <Checkbox checked={true}> Bonus Tradition </Checkbox>
+                    <Text style={{cursor: "pointer"}}> Bonus Tradition </Text>
                 </Popover>
             </Space>
 
@@ -58,7 +58,7 @@ function generateButtons(ideaList, ideaVals, callback){
     let allIdeas = (
         ideaList.map((ideaGroup) => 
         <Popover placement="right" title={"National Idea Set #" + num} content={<div style={{textTransform: "capitalize"}}>{generateIdeaDisplay(ideaGroup)}</div>}>
-            <Checkbox onClick={callback} checked={true}> National Idea Set #{num++} </Checkbox>
+            <Text style={{cursor: "pointer"}}> National Idea Set #{num++} </Text>
         </Popover>
         )
     )

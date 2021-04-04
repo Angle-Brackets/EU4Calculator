@@ -26,7 +26,6 @@ const CountryPanel = (props, {data}) => {
             context.name = country.countryName;
             context.tag = country.countryTag;
             context.flag = country.imagePath;
-            context.bonuses = bonuses;
             message.success(country.countryName + " selected successfully.");
         }
         else {
@@ -46,17 +45,18 @@ const CountryPanel = (props, {data}) => {
             const json = await res.json();
             setCountry(json);
         } catch(error){
+            //Add a screen to say this country's information is unavailable rather than infinite load.
             setCountry(undefined);
         }   
     }
-//Notes: make a new callback function for setting ideas nerd
+
     return (
         <Col span={4}>
             <Card hoverable bordered cover={<img alt={props.countryName} src={`/images/flags/${props.countryId}.png`} onClick={() => {pullCountryData(); showModal();}} style={{width: "50%", display: "block", marginLeft: "auto", marginRight: "auto", borderRadius: "9999px"}}/>} style={{ width: 240, textAlign: "center"}}>
                 <Meta title={props.countryName} style={{fontSize: "large"}}/>
             </Card>
-            <Modal visible={visible} loading={true} title={props.countryName} footer={[<Button key="select all" onClick={handleOk}>Select All</Button>,<Button key="back" icon={<CloseOutlined/>} onClick={handleCancel}/>, <Button key="submit" icon={<CheckOutlined/>} onClick={handleOk}/>]} onCancel={handleCancel} bodyStyle={{width: 400}}> 
-                {country ? <IdeaSelector countryData={country} onConfirm={selectBonuses}/> : <Skeleton active/>}
+            <Modal visible={visible} loading={true} title={props.countryName} footer={[<Button key="back" icon={<CloseOutlined/>} onClick={handleCancel}/>, <Button key="submit" icon={<CheckOutlined/>} onClick={handleOk}/>]} onCancel={handleCancel} bodyStyle={{width: 400}}> 
+                {country ? <IdeaSelector countryData={country}/> : <Skeleton active/>}
             </Modal>  
         </Col>
     );

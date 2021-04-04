@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import { Layout, Input } from 'antd'
+import { Layout, Input, Button } from 'antd'
+import {BulbOutlined} from '@ant-design/icons'
 import headerStyle from '../styles/headerStyle.module.css'
 import Link from 'next/link'
 import CountrySearch from '../components/CountrySearch'
@@ -18,11 +19,9 @@ const SiteHeader = (props) => {
                 </Link>
                 {props.title == undefined ? "The Europa Universalis IV Calculator" : props.title}       
             </Header>
-            {props.searchAvailable == true ? <CountrySearch/> : null}
+            {props.searchAvailable == true ? <CountrySearch/> : <Link href="/modifiers"><Button shape="round" type="text" size="large" style={{position: "absolute", right: "2%", marginTop: "0.5rem"}}><BulbOutlined style={{fontSize: "24px"}}/></Button></Link>}
         </Layout>
     );
-
-
 }
 
 export default SiteHeader
